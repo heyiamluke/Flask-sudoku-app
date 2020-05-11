@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset='UTF-8'>
 
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
@@ -16,58 +17,49 @@
     <script type="text/javascript" src="{{ url_for('static', filename='nextinput.js') }}"></script>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles.css') }}">
-  </head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles.css') }}">
+</head>
 
-  <body>
+<body>
 
     <div class="container">
 
-      <div class="heading">
+        <div class="heading">
 
-        <h1 class="title">Sudoku Solver</h1>
+            <h1 class="title">Sudoku Solver</h1>
 
-      </div>
 
-      {% with messages = get_flashed_messages() %}
+            <form action="{{url_for('random')}}" method="POST">
+                <input type="range" min="15" max="25" value="20" step="-1" class="range-slider" id="N" name="N">
+                <input type="submit" name="Random" value="Random Puzzle" class="btn btn-primary btn-block">
+            </form>
 
-          {% if messages %}
 
-            <div class="alert alert-danger alert-dismissable">
 
-              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 
-                {% for message in messages %}
 
-                  <p>{{ message }}</p>
 
-                {% endfor %}
 
-            </div>
+        </div>
 
-          {% endif %}
+        {% with messages = get_flashed_messages() %} {% if messages %}
 
-        {% endwith %}
+        <div class="alert alert-danger alert-dismissable">
 
-      {% block content %}{% endblock %}
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {% for message in messages %}
 
-    </div>
+            <p>{{ message }}</p>
 
-    <div class='footer'>
+            {% endfor %}
 
-      <a class="btn btn-social btn-github" href="https://github.com/underchemist/Flask-sudoku-app" target='_blank'>
+        </div>
 
-        <span class="fa fa-github"></span> View on github
-
-      </a>
-
-      <a class="btn btn-social btn-twitter" href="https://twitter.com/underchemist" target='_blank'>
-
-        <span class="fa fa-twitter"></span> underchemist
-
-      </a>
+        {% endif %} {% endwith %} {% block content %}{% endblock %}
 
     </div>
 
-  </body>
+
+
+</body>
+
 </html>

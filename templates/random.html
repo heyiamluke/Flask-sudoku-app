@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block content %}
+<div class="game-container">
+    <div class="grid-container">
+        <form action="{{ url_for('solution') }}" method="post" name="sudoku-input">
+            {% for i in range(9) %}
+            <div class="grid-row">
+                {% for j in range(9) %} {% if solved_puzzle[i][j] | int > 0 %}
+                <div class="grid-cell">
+                    <input type="text" maxlength="1" name='cell-input[{{ j+i*9 }}]' value="{{ solved_puzzle[i][j] }}" class="cell-readonly" readonly>
+                </div>
+                {% else %}
+                <div class="grid-cell">
+                    <input type="text" maxlength="1" name='cell-input[{{ j+i*9 }}]' value="{{ solved_puzzle[i][j] }}" class="cell-input">
+                </div>
+                {% endif %} {% endfor %}
+            </div>
+            {% endfor %}
+            <div class="button-container">
+                <input type="submit" value="Solve" class="btn btn-primary btn-block">
+                <button id="clear-btn" type="button" class="btn btn-secondary btn-block">Clear</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- <div>
+    {{slidervalue}}
+</div> -->
+{% endblock %}

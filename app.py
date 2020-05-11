@@ -1,13 +1,12 @@
-from flask import render_template, request, flash, redirect, url_for
-from app import app
-from .sudopy import Sudoku
+from flask import Flask,render_template, request, flash, redirect, url_for, jsonify
+
+
+from app.sudopy import Sudoku
+from app.Sudokupy import random_puzzle
 import os
+from pprint import pprint
 
-app.config.from_object('local_config')
-
-if 'HEROKU' in os.environ:
-    app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
-    app.config['DEBUG'] = os.environ['DEBUG']
+app = Flask(__name__)
 
 
 @app.route('/')
@@ -40,3 +39,15 @@ def clean_puzzle(puzzle):
         elif int(val) in range(1, 10):
             output += val
     return output
+
+
+@app.route('/random', methods=['GET','POST'])
+def random():
+    if request.method == "POST":
+            N=request.form.get('N')
+            data=random_puzzle(int(N))
+            S = Sudoku(data)
+            return render_template('random.html', solved_puzzle=S.puzzle, slidervalue=N)
+    
+if __name__ == '__main__':
+    app.run(threaded=True)

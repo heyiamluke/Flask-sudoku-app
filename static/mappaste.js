@@ -1,5 +1,5 @@
 $(function() {
-var $inputs = $(".def-txt-input");
+var $inputs = $(".cell-input");
 var intRegex = /^[\d.]+$/;
 
 // Prevents user from manually entering non-digits.
@@ -41,7 +41,7 @@ function pasteValues(element) {
     var values = element.split("");
 
     $(values).each(function(index) {
-        var $inputBox = $('.def-txt-input[name="cell-input[' + (index) + ']"]');
+        var $inputBox = $('.cell-input[name="cell-input[' + (index) + ']"]');
         if (!isNaN(values[index])) {
             $inputBox.val(values[index])
         }

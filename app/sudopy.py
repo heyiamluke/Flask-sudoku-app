@@ -74,7 +74,7 @@ class Sudoku:
         p = []
         for i in range(self._NROWS):
             row = puzzle_str[i * 9: i * 9 + 9]
-            p.append([int(val) if val != '.' else 0 for val in row])
+            p.append([int(val) if val != '.' else "" for val in row])
 
         return p
 

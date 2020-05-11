@@ -3,7 +3,7 @@ $(function() {
     if (el) {
             el.addEventListener("click", function() {
             for (i = 0; i < 82; i++) {
-            var $inputBox = $('.def-txt-input[name="cell-input[' + (i) + ']"]');
+            var $inputBox = $('.cell-input[name="cell-input[' + (i) + ']"]');
                 $inputBox.val("")
             }
         });
